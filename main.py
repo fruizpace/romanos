@@ -2,22 +2,17 @@ from romanos import * # así ya no es necesario poner romano.funcion. Uso el nom
 import unittest
 
 #romano_a_entero("IIII")
-print(romano_a_entero('IC'))
+print(romano_a_entero('MCMXIX'))
 
+'''
+assert romano_a_entero('I') == 1, 'I es incorrecto'
+assert romano_a_entero('M') == 1000, 'M es incorrecto'
+assert romano_a_entero('D') == 500, 'D es incorrecto'
+assert romano_a_entero('C') == 100, 'C es incorrecto'
+assert romano_a_entero('L') == 50, 'L es incorrecto'
+assert romano_a_entero('X') == 10, 'X es incorrecto'
+assert romano_a_entero('V') == 5, 'V es incorrecto'
 
-'''
-assert simbolo_a_entero('M') == 1000
-assert simbolo_a_entero('D') == 500
-assert simbolo_a_entero('C') == 100
-assert simbolo_a_entero('L') == 50
-assert simbolo_a_entero('X') == 10
-assert simbolo_a_entero('V') == 5
-assert simbolo_a_entero('I') == 1
-'''
-'''
-print(romano_a_entero('M'))
-print(romano_a_entero('D'))
-print(romano_a_entero('Z'))
-print(romano_a_entero('d'))
 print(romano_a_entero(23))
+print(romano_a_entero('Z'))
 '''

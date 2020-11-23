@@ -38,10 +38,10 @@ def romano_a_entero(romano):
                 raise OverflowError(f"Hay un valor {listaTemp[i-1]} (tipo 1) restando y repetido a la izquierda")  
         
         for i in range(1, len(listaTemp)):
-            if listaTemp[i-1] < listaTemp[i] and not (listaTemp[i-1] == 1 and listaTemp[i] in (10, 5)) or (listaTemp[i-1] == 10 and listaTemp[i] in (100, 50)) or (listaTemp[i-1] == 100 and listaTemp[i] in (1000, 500)):
+            if listaTemp[i-1] < listaTemp[i] and not ((listaTemp[i-1] == 1 and listaTemp[i] in (10, 5)) or (listaTemp[i-1] == 10 and listaTemp[i] in (100, 50)) or  (listaTemp[i-1] == 100 and listaTemp[i] in (1000, 500))):
                 raise OverflowError(f"Hay una resta no aceptada") 
             elif  listaTemp[i-1] < listaTemp[i] and  (listaTemp[i-1] == 1 and listaTemp[i] in (10, 5)) or (listaTemp[i-1] == 10 and listaTemp[i] in (100, 50)) or (listaTemp[i-1] == 100 and listaTemp[i] in (1000, 500)):
-                listaTemp[i-1] = listaTemp[i-1] * -1  
+                listaTemp[i-1] = listaTemp[i-1] * -1
 
     frecuenciaSimbolos = cuentaSimbolos(romano) # diccionario con frecuencia de símbolos
     
@@ -55,3 +55,47 @@ def romano_a_entero(romano):
         acumulador += listaTemp[i]
 
     return acumulador
+
+
+
+def descomponer(numero):
+    if not isinstance(numero, int):
+        raise SyntaxError(f"{numero} no es un número natural")
+    l = []
+    for d in str(numero):
+        l.append(int(d))
+    return l
+
+#return [int(d) for d in str(numero)] # es lo mismo que arriba
+
+unidades = ('I','V', 'X')
+decenas = ('X','L', 'C')
+centenas = ('C','D', 'M')
+millares = ('M',) # tupla con esa coma
+
+lista_ordenes = [unidades, decenas, centenas, millares]
+
+def convertir(ordenes_magnitud):
+    resultado = []
+    contador = 0
+    for orden in ordenes_magnitud[::-1]:
+        resultado.append(procesar_simbolo(orden, lista_ordenes[contador]))
+        contador += 1
+    
+    #resultado.reverse() # esta función no devuelve nada así que hay que cogerla con join.
+    return ''.join(reversed(resultado))
+
+
+
+def procesar_simbolo(s, clave):
+    if s== 9:
+        return clave[0] + clave[2]
+    elif s >= 5:
+        return clave[1] + clave[0]*(s-5)
+    elif s == 4:
+        return clave[0] + clave[1]
+    else:
+        return clave[0]*s
+
+print(descomponer(1983))
+print(convertir([1, 9, 8, 3]))
